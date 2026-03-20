@@ -12,7 +12,7 @@ public class SelecaoPersonagem {
     JButton botaoGuerreiro;
     JButton botaoVoltar;
 
-    public SelecaoPersonagem() {
+    public SelecaoPersonagem(Paineis multiplosPaineis) {
         // Configurando os botoes
         ImageIcon iconePergunta = new ImageIcon("Assets/textoPergunta.png");
         ImageIcon iconeBarbaro = new ImageIcon("Assets/botaoBarbaro.png");
@@ -72,16 +72,11 @@ public class SelecaoPersonagem {
         painelPrincipal.add(painelInferior,BorderLayout.SOUTH);
         painelPrincipal.setBackground(Color.BLACK);
 
-        /* Essa parte vai ser retirada quando fizer a transicao dos
-        paineis, mas por enquanto ela ta aqui pra visualizar a tela
-        de selecao dos personagens mudando no arquivo 'Main' o 'Menu'
-        pelo nome desse arquivo */
-        janela = new JFrame("Dungeon Fighter");
-        janela.add(painelPrincipal);
-        janela.setSize(1200, 800);
-        janela.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setVisible(true);
+        //Implementacao das acoes dos botoes usando a classe "Paineis", que contem o cardlayout
+        JPanel painelComPaineis = multiplosPaineis.paineis;
+        CardLayout cardLayout = multiplosPaineis.layoutPaineis;
+
+        botaoVoltar.addActionListener(e -> cardLayout.show(painelComPaineis, "Painel do Menu"));
 
     }
 }
