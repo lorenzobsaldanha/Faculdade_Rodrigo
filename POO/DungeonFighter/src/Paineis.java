@@ -4,11 +4,13 @@ import javax.swing.*;
 public class Paineis {
     Menu menu;
     SelecaoPersonagem selecaoPersonagem;
+    SelecaoAtributos selecaoAtributos;
     JFrame janela;
     JPanel paineis;
     CardLayout layoutPaineis;
-    JPanel painelSelecaoPersonagem;
     JPanel painelMenu;
+    JPanel painelSelecaoPersonagem;
+    JPanel painelSelecaoAtributos;
 
     public Paineis () {
 
@@ -17,12 +19,15 @@ public class Paineis {
         paineis.setLayout(layoutPaineis);
         menu = new Menu(this);
         selecaoPersonagem = new SelecaoPersonagem(this);
+        selecaoAtributos = new SelecaoAtributos(this);
 
         painelSelecaoPersonagem = selecaoPersonagem.painelPrincipal;
         painelMenu = menu.painelPrincipal;
+        painelSelecaoAtributos = selecaoAtributos.painelPrincipal;
 
         paineis.add(painelMenu, "Painel do Menu");
         paineis.add(painelSelecaoPersonagem, "Painel de Selecao de Personagem");
+        paineis.add(painelSelecaoAtributos, "Painel Atributos");
 
         janela = new JFrame("Dungeon Fighter");
         janela.add(paineis);

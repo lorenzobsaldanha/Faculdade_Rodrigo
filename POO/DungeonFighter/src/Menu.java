@@ -2,46 +2,55 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Menu{
-    JLabel titulo;
-    JFrame janela;
+    Font fonteTitulo;
+    Font fonteBotoes;
+
+    JLabel titulo1;
+    JLabel titulo2;
+
+    JPanel painelTitulo;
     JPanel painelPrincipal;
     JPanel painelBotoes;
+
     JButton botaoPlay;
     JButton botaoDebug;
     JButton botaoSair;
 
     public Menu(Paineis multiplosPaineis) {
-        //Icones
-        ImageIcon imageTitulo = new ImageIcon("Assets/title.png");
-        ImageIcon iconePlay = new ImageIcon("Assets/botaoPlay.png");
-        ImageIcon iconeDebug = new ImageIcon("Assets/botaoDebug.png");
-        ImageIcon iconeSair = new ImageIcon("Assets/botaoSair.png");
-
-        //Resize dos icones(da pra tirar isso se no assets modificar o tamanho dos icones)
-        Image imagemPlay = iconePlay.getImage().getScaledInstance(150, 75, Image.SCALE_SMOOTH);
-        Image imagemDebug = iconeDebug.getImage().getScaledInstance(150, 75, Image.SCALE_SMOOTH);
-        Image imagemSair = iconeSair.getImage().getScaledInstance(150, 65, Image.SCALE_SMOOTH);
-
-        ImageIcon iconePlayResize = new ImageIcon(imagemPlay);
-        ImageIcon iconeDebugResize = new ImageIcon(imagemDebug);
-        ImageIcon iconeSairResize = new ImageIcon(imagemSair);
-
         //Título
-        titulo = new JLabel(imageTitulo);
-        titulo.setHorizontalAlignment(JLabel.CENTER);
-        titulo.setBounds(0,100,1920,300);
+        fonteTitulo = Fonte.carregar(90);
+        fonteBotoes = Fonte.carregar(50);
 
-        //Botões e o painel deles
-        botaoPlay = new JButton(iconePlayResize);
-        botaoDebug = new JButton(iconeDebugResize);
-        botaoSair = new JButton(iconeSairResize);
+        titulo1 = new JLabel("Dungeon");
+        titulo2 = new JLabel("Fighter");
+
+        JLabel [] titulos = {titulo1,titulo2};
+        for(JLabel t : titulos) {
+            t.setFont(fonteTitulo);
+            t.setForeground(Color.WHITE);
+            t.setHorizontalAlignment(JLabel.CENTER);
+            t.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+
+        painelTitulo = new JPanel();
+        painelTitulo.setBackground(Color.BLACK);
+        painelTitulo.setLayout(new BoxLayout(painelTitulo,BoxLayout.Y_AXIS));
+        painelTitulo.add(titulo1);
+        painelTitulo.add(titulo2);
+
+        //Botões
+        botaoPlay = new JButton("Jogar");
+        botaoDebug = new JButton("Debug");
+        botaoSair = new JButton("Sair");
 
         JButton[] botoes = {botaoPlay,botaoDebug,botaoSair};
         for(JButton b : botoes) {
-            b.setAlignmentX(Component.CENTER_ALIGNMENT);
+            b.setFont(fonteBotoes);
+            b.setFocusPainted(false);
             b.setBorderPainted(false);
             b.setContentAreaFilled(false);
-            b.setFocusPainted(false);
+            b.setForeground(Color.WHITE);
+            b.setAlignmentX(Component.CENTER_ALIGNMENT);
         }
         painelBotoes = new JPanel();
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
@@ -58,16 +67,15 @@ public class Menu{
         //Painel Principal
         painelPrincipal = new JPanel();
         painelPrincipal.setLayout(new BorderLayout());
-        painelPrincipal.add(titulo,BorderLayout.NORTH);
+        painelPrincipal.add(painelTitulo,BorderLayout.NORTH);
         painelPrincipal.add(painelBotoes,BorderLayout.CENTER);
         painelPrincipal.setBackground(Color.BLACK);
 
-       //Implementacao das acoes dos botoes usando a classe "Paineis", que contem o cardlayout
+        //Implementacao das acoes dos botoes usando a classe "Paineis", que contem o cardlayout
         JPanel painelComPaineis = multiplosPaineis.paineis;
         CardLayout cardLayout = multiplosPaineis.layoutPaineis;
        
         botaoPlay.addActionListener(e -> cardLayout.show(painelComPaineis, "Painel de Selecao de Personagem"));
         botaoSair.addActionListener(e -> System.exit(0));
-       
     }
 }
