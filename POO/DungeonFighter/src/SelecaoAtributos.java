@@ -19,7 +19,9 @@ public class SelecaoAtributos extends Heroi{
     JPanel painelPoder;
     JPanel painelDefesa;
     PainelInferior painelInferior;
-
+    /*
+    * Ainda falta fazer algumas coisas mas to com preguiça entao vou dar push nessa bomba, depois eu faço
+    * */
     public SelecaoAtributos(Paineis multiplosPaineis) {
 
         ImageIcon iconeCoracao = new ImageIcon("Assets/coracao.png");
